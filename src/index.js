@@ -1,6 +1,10 @@
 const through = require('through2')
 
 function dematerialize({ chunkSize, beginMarker = '{{begin}}', endMarker= '{{end}}' } = {}) {
+  if (!chunkSize) {
+    throw new TypeError('chunkSize is a mandatory argument')
+  }
+
   return through(function(chunk, encoding, next) {
     this.push(Buffer.from(beginMarker))
 

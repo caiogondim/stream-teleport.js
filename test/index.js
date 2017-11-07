@@ -64,6 +64,10 @@ test('accepts custom `beginMarker` and `endMarker`', (t) => {
   stream1.push('a')
 })
 
+test('throws if `chunkSize` is missing', (t) => {
+  t.throws(() => streamTeleport.dematerialize(), TypeError)
+})
+
 //
 // Rematerialize
 //
