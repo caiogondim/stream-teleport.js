@@ -7,7 +7,7 @@
     "example": "example"
   },
   "scripts": {
-    "test": "ava test",
+    "test": "ava test && standard --fix 'src/*.js' 'test/*.js'",
     "watch": "watchify example/index.js -o example/bundle.js -v"
   },
   "repository": {
@@ -24,6 +24,7 @@
     "through2": "2.0.3"
   },
   "devDependencies": {
-    "ava": "^0.23.0"
+    "ava": "^0.23.0",
+    "standard": "^10.0.3"
   }
 }

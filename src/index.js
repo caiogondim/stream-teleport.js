@@ -1,11 +1,11 @@
 const through = require('through2')
 
-function dematerialize({ chunkSize, beginMarker = '{{begin}}', endMarker= '{{end}}' } = {}) {
+function dematerialize ({ chunkSize, beginMarker = '{{begin}}', endMarker = '{{end}}' } = {}) {
   if (!chunkSize) {
     throw new TypeError('chunkSize is a mandatory argument')
   }
 
-  return through(function(chunk, encoding, next) {
+  return through(function (chunk, encoding, next) {
     this.push(Buffer.from(beginMarker))
 
     for (let i = 0; i < chunk.byteLength; i += chunkSize) {
@@ -17,11 +17,11 @@ function dematerialize({ chunkSize, beginMarker = '{{begin}}', endMarker= '{{end
   })
 }
 
-function rematerialize({ beginMarker = '{{begin}}', endMarker = '{{end}}' } = {}) {
+function rematerialize ({ beginMarker = '{{begin}}', endMarker = '{{end}}' } = {}) {
   let isReceiving = false
   let accumulator = Buffer.from([])
 
-  var stream = through(function(chunk, encoding, next) {
+  var stream = through(function (chunk, encoding, next) {
     if (chunk.toString() === beginMarker) {
       accumulator = Buffer.from([])
       isReceiving = true
