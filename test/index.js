@@ -109,6 +109,23 @@ test('accepts custom `beginMarker` and `endMarker`', (t) => {
   stream1.push('🌛')
 })
 
+test('pass data along if not receiving a chunked stream', (t) => {
+  const stream1 = through()
+  const stream2 = through()
+  const rematerialize = streamTeleport.rematerialize({
+    beginMarker: '🌜',
+    endMarker: '🌛'
+  })
+
+  stream1.pipe(rematerialize).pipe(stream2)
+
+  stream2.on('data', data => {
+    t.is(data.toString(), 'abcd')
+  })
+
+  stream1.push('abcd')
+})
+
 //
 // Integration
 //
