@@ -22,16 +22,18 @@ npm install -S stream-teleport
 Use `.dematerialize` to break a chunk into smaller chunks. Then on the other end use `.rematerialize`
 to reassemble it.
 
-Example with WebRTC and [simple-peer lib](https://github.com/feross/simple-peer):
+Example sending a big file over WebRTC and [simple-peer lib](https://github.com/feross/simple-peer):
 
 ```js
 // On sender machine
 const dematerializeStream = streamTeleport.dematerialize({ chunkSize: 1024 })
-process.stdin.pipe(dematerializeStream).pipe(peer)
+const fileStream = fs.createReadStream('massive-video.mp4')
+fileStream.pipe(dematerializeStream).pipe(peer)
 
 // On receiver machine
 const rematerializeStream = streamTeleport.rematerialize()
-peer.pipe(rematerializeStream).pipe(process.stdout)
+const fileStream = fs.createWriteStream('massive-video.mp4')
+peer.pipe(rematerializeStream).pipe(fileStream)
 ```
 
 ---
