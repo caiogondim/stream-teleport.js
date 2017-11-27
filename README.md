@@ -11,13 +11,13 @@
 Send big files or chunks of data over a stream.
 Useful to overcome WebRTC data channel message size limit.
 
-### Installation
+## Installation
 
 ```bash
 npm install -S stream-teleport
 ```
 
-### Usage
+## Usage
 
 Use `.dematerialize` to break a chunk into smaller chunks. Then on the other end use `.rematerialize`
 to reassemble it.
