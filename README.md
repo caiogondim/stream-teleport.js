@@ -8,4 +8,34 @@
 
 <br>
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis totam quisquam, quam, doloribus voluptatem veritatis, iusto aut quas iure laudantium vero dignissimos! Eveniet, repellat voluptate, est qui quasi cumque quis.
+Send big files or chunks of data over a stream.
+Useful to overcome WebRTC data channel message size limit.
+
+### Installation
+
+```bash
+npm install -S stream-teleport
+```
+
+### Usage
+
+Use `.dematerialize` to break a chunk into smaller chunks. Then on the other end use `.rematerialize`
+to reassemble it.
+
+Example with WebRTC and [simple-peer lib](https://github.com/feross/simple-peer):
+
+```js
+// On sender machine
+const dematerializeStream = streamTeleport.dematerialize({ chunkSize: 1024 })
+process.stdin.pipe(dematerializeStream).pipe(peer)
+
+// On receiver machine
+const rematerializeStream = streamTeleport.rematerialize()
+peer.pipe(rematerializeStream).pipe(process.stdout)
+```
+
+---
+
+[caiogondim.com](https://caiogondim.com) &nbsp;&middot;&nbsp;
+GitHub [@caiogondim](https://github.com/caiogondim) &nbsp;&middot;&nbsp;
+Twitter [@caio_gondim](https://twitter.com/caio_gondim)
