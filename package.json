@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "nyc ava test && standard --fix 'src/*.js' 'test/*.js'",
-    "watch": "watchify example/index.js -o example/bundle.js -v"
+    "watch": "watchify example/index.js -o example/bundle.js -v",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
