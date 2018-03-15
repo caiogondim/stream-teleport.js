@@ -1,6 +1,6 @@
 {
   "name": "stream-teleport",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Send big files or chunks of data over a stream",
   "main": "src/index.js",
   "directories": {
